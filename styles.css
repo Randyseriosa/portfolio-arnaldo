@@ -1,0 +1,143 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  color: white;
+  font-family: sans-serif;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.image-container img {
+  width: auto;
+  height: 100vh;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+/* Zoom out and adjust height for portrait/mobile */
+@media (max-width: 768px) and (orientation: portrait) {
+  .image-container img {
+    height: auto;
+    width: 100%;
+    max-height: 90vh;
+    transform: scale(0.95);
+  }
+}
+
+.sidebar {
+  width: 260px;
+  background: #181818 url('assets/sidepanel-bg.png') center center/cover no-repeat;
+  color: #fff;
+  padding: 32px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-right: 1px solid #222;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 10;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  /* Optional: add a dark overlay for readability */
+  box-shadow: inset 0 0 0 2000px rgba(24,24,24,0.7);
+}
+.sidebar.hide {
+  transform: translateX(-100%);
+}
+.sidebar-toggle-btn {
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background 0.2s;
+  z-index: 20;
+}
+.sidebar-toggle-btn.outside {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: none;
+}
+.sidebar-toggle-btn.inside {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #333;
+  font-size: 1em;
+  display: block;
+  padding: 4px 8px;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  line-height: 1;
+}
+.sidebar.hide + .sidebar-toggle-btn.outside {
+  display: block;
+}
+@media (max-width: 600px) {
+  .sidebar {
+    width: 80vw;
+    min-width: 180px;
+    max-width: 320px;
+  }
+}
+@media (max-width: 600px), (max-width: 900px) and (orientation: portrait) {
+  .sidebar {
+    width: 60vw;
+    min-width: 140px;
+    max-width: 90vw;
+    padding: 20px 10px 10px 10px;
+    font-size: 0.95em;
+  }
+  .sidebar-toggle-btn.inside {
+    top: 10px;
+    right: 10px;
+    font-size: 1em;
+    padding: 4px 8px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    line-height: 1;
+  }
+  .sidebar-toggle-btn.outside {
+    font-size: 1.2em;
+    padding: 6px 10px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    top: 10px;
+    left: 10px;
+  }
+  #mainContent {
+    margin-left: 0 !important;
+  }
+}
+
+#mainContent {
+  margin-left: 0;
+  transition: margin-left 0.3s;
+}
+
+html {
+  scroll-behavior: smooth;
+}
